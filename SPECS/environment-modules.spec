@@ -1,6 +1,6 @@
 Name:           environment-modules
 Version:        3.2.10
-Release:        6%{?dist}
+Release:        8%{?dist}
 Summary:        Provides dynamic modification of a user's environment
 
 Group:          System Environment/Base
@@ -100,6 +100,12 @@ make test
 
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 3.2.10-8
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.2.10-7
+- Mass rebuild 2013-12-27
+
 * Thu Aug  8 2013 Jan Synáček <jsynacek@redhat.com> - 3.2.10-6
 - Call test command in csh alias by its full path (bug #977331)
 
