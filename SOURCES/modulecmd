@@ -1,0 +1,25 @@
+#!/bin/bash
+if [ -x /usr/bin/logger ]
+then 
+    log=/usr/bin/logger
+else
+    if [ -x /bin/logger ]
+    then 
+	log=/bin/logger
+    else
+	log=`which logger 2>/dev/null`
+    fi
+fi
+
+facility=user
+level=notice
+
+if [ ! -z "$log" ]
+then
+    OPTIONS=`echo $@ |sed "s/ /_/g" | tr '/' '@'`
+    msg="U${USER} H${HOSTNAME} VC${VSC_INSTITUTE_CLUSTER} VAL${VSC_ARCH_LOCAL} ID${PBS_JOBID} ${OPTIONS}"
+    $log -p ${facility}.${level} -t modulecmd $msg
+fi
+
+p=`dirname $0`
+$p/modulecmd.exe $@
