@@ -1,0 +1,11 @@
+--- modules-3.2.10.orig/init/bash.in	2012-10-25 21:33:34.000000000 +0200
++++ modules-3.2.10/init/bash.in	2015-06-03 03:26:16.512608933 +0200
+@@ -7,7 +7,7 @@
+ @VERSIONING@fi
+ @VERSIONING@export MODULE_VERSION_STACK
+ 
+-@VERSIONING@module() { eval `@BASEPREFIX@/Modules/$MODULE_VERSION/bin/modulecmd bash $*`; }
++@VERSIONING@module() { eval `/usr/bin/modulecmd bash $*`; if [ "$FORWARD_COMPAT_LD_PRELOAD" ]; then export LD_PRELOAD=''; fi; if [ "$FORWARD_COMPAT_LD_LIBRARY_PATH" ]; then export LD_LIBRARY_PATH="/lib64:/usr/lib64:$(echo $LD_LIBRARY_PATH | LD_LIBRARY_PATH="/lib64" /bin/sed 's/:\/lib64:\/usr\/lib64:/:/g')"; fi;}
+ @NOTVERSIONING@module() { eval `@bindir@/modulecmd bash $*`; }
+ export -f module
+ 
