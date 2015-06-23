@@ -7,7 +7,7 @@
 -@VERSIONING@module() { eval `@BASEPREFIX@/Modules/$MODULE_VERSION/bin/modulecmd bash $*`; }
 -@NOTVERSIONING@module() { eval `@bindir@/modulecmd bash $*`; }
 +@VERSIONING@module() { eval `@BASEPREFIX@/Modules/$MODULE_VERSION/bin/modulecmd bash $*`; if [ "$FORWARD_COMPAT_LD_PRELOAD" ] && [ "$VSC_OS_LOCAL" != "SL6" ]; then export LD_PRELOAD=''; fi; if [ "$FORWARD_COMPAT_LD_LIBRARY_PATH" ] && [ "$VSC_OS_LOCAL" != "SL6" ]; then export LD_LIBRARY_PATH="/lib64:/usr/lib64:$(echo $LD_LIBRARY_PATH | LD_LIBRARY_PATH="/lib64" /bin/sed 's/:\/lib64:\/usr\/lib64:/:/g')"; fi;}
-+@NOTVERSIONING@module() { eval `@bindir@/modulecmd bash $*`; if [ "$FORWARD_COMPAT_LD_PRELOAD" ] && [ "$VSC_OS_LOCAL" != "SL6" ]; then export LD_PRELOAD=''; fi; if [ "$FORWARD_COMPAT_LD_LIBRARY_PATH" ]; then export LD_LIBRARY_PATH="/lib64:/usr/lib64:$(echo $LD_LIBRARY_PATH | LD_LIBRARY_PATH="/lib64" /bin/sed 's/:\/lib64:\/usr\/lib64:/:/g')"; fi;}
++@NOTVERSIONING@module() { eval `@bindir@/modulecmd bash $*`; if [ "$FORWARD_COMPAT_LD_PRELOAD" ] && [ "$VSC_OS_LOCAL" != "SL6" ]; then export LD_PRELOAD=''; fi; if [ "$FORWARD_COMPAT_LD_LIBRARY_PATH" ] && [ "$VSC_OS_LOCAL" != "SL6" ]; then export LD_LIBRARY_PATH="/lib64:/usr/lib64:$(echo $LD_LIBRARY_PATH | LD_LIBRARY_PATH="/lib64" /bin/sed 's/:\/lib64:\/usr\/lib64:/:/g')"; fi;}
  export -f module
 
  MODULESHOME=@prefix@
