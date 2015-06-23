@@ -1,6 +1,6 @@
 Name:           environment-modules
 Version:        3.2.10
-Release:        2.ug%{?dist}
+Release:        3.ug%{?dist}
 Summary:        Provides dynamic modification of a user's environment
 
 Group:          System Environment/Base
@@ -105,6 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jun 23 2015 Jens Timmerman <jens.timmerman@ugent.be> - 3.2.10-3
+- Let path also check for VSC_OS_LOCAL
+
 * Fri Jun 5 2015 Jens Timmerman <jens.timmerman@ugent.be> - 3.2.10-2
 - Added patch to optionally filter out LD_PRELOAD and LD_LIBRARY_PATH in the modulecmd
 
