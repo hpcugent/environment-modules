@@ -1,6 +1,6 @@
 Name:           environment-modules
 Version:        3.2.10
-Release:        1.ug%{?dist}
+Release:        3.ug%{?dist}
 Summary:        Provides dynamic modification of a user's environment
 
 Group:          System Environment/Base
@@ -19,6 +19,7 @@ Patch1:         environment-modules-versioning.patch
 Patch2:         environment-modules-clear.patch
 # Patch from modules list to add completion to avail command
 Patch3:         environment-modules-avail.patch
+Patch4:         environment-modules-optional_ld.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  tcl-devel, tclx-devel, libX11-devel
@@ -58,6 +59,7 @@ have access to the module alias.
 %patch1 -p1 -b .versioning
 %patch2 -p1 -b .clear
 %patch3 -p1 -b .avail
+%patch4 -p1 -b .opt_ld
 
 
 %build
@@ -103,13 +105,19 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jun 23 2015 Jens Timmerman <jens.timmerman@ugent.be> - 3.2.10-3
+- Let path also check for VSC_OS_LOCAL
+
+* Fri Jun 5 2015 Jens Timmerman <jens.timmerman@ugent.be> - 3.2.10-2
+- Added patch to optionally filter out LD_PRELOAD and LD_LIBRARY_PATH in the modulecmd
+
 * Fri Aug 16 2013 Orion Poplawski <orion@cora.nwra.com> - 3.2.10-1
 - Update to 3.2.10 from Fedora master (bug #997946)
 
 * Thu Jan 7 2010 Orion Poplawski <orion@cora.nwra.com> - 3.2.7b-7
 - Add patch to set a sane default MANPATH
 - Add createmodule.sh utility script for creating modulefiles
- 
+
 * Mon Nov 30 2009 Orion Poplawski <orion@cora.nwra.com> - 3.2.7b-6
 - Add Requires: propcs (bug #54272)
 
